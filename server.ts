@@ -1,24 +1,21 @@
 import * as dotenv from 'dotenv'
-
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import mongoose from "mongoose";
-import router from "./src/user/user-router";
-
-dotenv.config()
-
+import productRoutes from "./src/products/products-router";
 
 const app: Express = express();
-const port = 3000
+app.use(express.json())
 
-
+dotenv.config()
+const port = process.env.PORT || 3001
 const uri = process.env.DB_URL || ''
+
 mongoose
+  .set('strictQuery', false)
   .connect(uri)
-  .then(() => console.log('connected'))
-app.use('/user', router)
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
+  .then(() => console.log())
+
+app.use('/', productRoutes)
 
 app.listen(port, () => {
   console.log(`Example app listening on pot ${port}`)
