@@ -1,10 +1,12 @@
 import * as dotenv from 'dotenv'
-import express, { Express } from "express";
+import express, { Express, } from "express";
 import mongoose from "mongoose";
+import cors from 'cors'
 import productRoutes from "./src/products/products-router";
 
 const app: Express = express();
 app.use(express.json())
+app.use(cors({origin: 'http://localhost:3002', credentials: true}))
 
 dotenv.config()
 const port = process.env.PORT || 3001
