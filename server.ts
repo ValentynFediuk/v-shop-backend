@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors({origin: 'http://localhost:3002', credentials: true}))
 
 dotenv.config()
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 5100
 const uri = process.env.DB_URL || ''
 
 mongoose
