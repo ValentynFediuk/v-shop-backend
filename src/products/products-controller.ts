@@ -25,9 +25,9 @@ const getProducts = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getProduct = async (req: Request, res: Response, next: NextFunction) => {
-	const title = req.params.title.replaceAll('-', ' ');
+	const id = req.params.title
 	try {
-		const product = await Product.findOne({ title });
+		const product = await Product.findById(id);
 		if (!product) return res.status(404).send({ message: 'Product not found' });
 		res.status(200).send(product);
 	} catch (err) {
